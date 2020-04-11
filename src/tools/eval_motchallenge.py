@@ -6,12 +6,13 @@ Modified by Xingyi Zhou
 
 import argparse
 import glob
-import os
 import logging
-import motmetrics as mm
-import pandas as pd
+import os
 from collections import OrderedDict
 from pathlib import Path
+
+import motmetrics as mm
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="""
@@ -115,8 +116,8 @@ if __name__ == '__main__':
     for k in change_fmt_list:
         fmt[k] = fmt['mota']
     print(mm.io.render_summary(
-      summary, formatters=fmt, 
-      namemap=mm.io.motchallenge_metric_names))
+        summary, formatters=fmt,
+        namemap=mm.io.motchallenge_metric_names))
     if args.eval_official:
         metrics = mm.metrics.motchallenge_metrics + ['num_objects']
         summary = mh.compute_many(
@@ -126,4 +127,3 @@ if __name__ == '__main__':
         summary, formatters=mh.formatters, 
         namemap=mm.io.motchallenge_metric_names))
         logging.info('Completed')
-    

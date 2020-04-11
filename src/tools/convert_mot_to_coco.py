@@ -1,7 +1,7 @@
-import os
-import numpy as np
 import json
-import cv2
+import os
+
+import numpy as np
 
 # Use the same script for MOT16
 # DATA_PATH = '../../data/mot16/'
@@ -14,7 +14,7 @@ CREATE_SPLITTED_DET = True
 
 if __name__ == '__main__':
   for split in SPLITS:
-    data_path = DATA_PATH + (split if not HALF_VIDEO else 'train')
+    data_path = DATA_PATH + (split if split == 'test' else 'train')
     out_path = OUT_PATH + '{}.json'.format(split)
     out = {'images': [], 'annotations': [], 
            'categories': [{'id': 1, 'name': 'pedestrain'}],
@@ -26,7 +26,7 @@ if __name__ == '__main__':
     for seq in sorted(seqs):
       if '.DS_Store' in seq:
         continue
-      if 'mot17' in DATA_PATH and (split != 'test' and not ('FRCNN' in seq)):
+      if 'mot17' in DATA_PATH and not ('FRCNN' in seq):
         continue
       video_cnt += 1
       out['videos'].append({
