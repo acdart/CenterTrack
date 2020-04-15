@@ -26,7 +26,7 @@ if __name__ == '__main__':
     for seq in sorted(seqs):
       if '.DS_Store' in seq:
         continue
-      if 'mot17' in DATA_PATH and not ('FRCNN' in seq):
+      if 'mot17' in DATA_PATH and (split != 'test' and not ('FRCNN' in seq)):
         continue
       video_cnt += 1
       out['videos'].append({
